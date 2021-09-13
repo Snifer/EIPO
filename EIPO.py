@@ -16,7 +16,7 @@ __version__ = "0.1"
 __email__ = "sniferl4bs@gmail.com"
 
 
-import time, random, json, os
+import time, random, json, os, shodan
 import requests as req
 from os import listdir
 from os.path import isfile, join
@@ -46,6 +46,8 @@ jsonfolder_output=mypath +'JsonFiles/'
 ipsfile=mypath + 'lista.ip' 
 servicestring='http://ifconfig.co/json?ip=' 
 isps={}
+shodan_api='XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+api = shodan.Shodan(shodan_api)
 
 # Lista de user agents
 user_agent_list = [
@@ -108,7 +110,21 @@ for f in listdir(jsonfolder_output):
                 print('Fichero con error: ' + file)
             print('-----------')
 
-
+# Shodan search for ports
+print('\n-----------')
+with open(ipsfile, 'r') as f_input:
+    for line in f_input.readlines():
+        try:
+            line = line.replace('\n', '')
+            result = api.host(line)
+            print('Servicios encontrados en: ' + line)
+            for port in result['ports']:
+                print(Fore.GREEN + 'Puerto encontrado: ' + Style.RESET_ALL + str(port))
+            print('-----------')
+        except Exception:
+            print(Fore.RED + 'No hay puertos disponibles para la IP ' + line + Style.RESET_ALL)
+            print('-----------')
+            
 sorted_asn_org = sorted(isps.items(), key=lambda kv: kv[1])
 print('\n' + Fore.RED + '[+] ' + Fore.GREEN + ' Cantidad de IPs por ASN: ' + Style.RESET_ALL )    
 pprint(sorted_asn_org)
