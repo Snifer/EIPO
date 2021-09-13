@@ -10,7 +10,7 @@ servicestring: Servicio donde se consume las ips.
 """
 
 __author__      = "Jose Moruno Cadima, Lizbeth Leaños Jataco"
-__copyright__   = "Copyright 2020 www.sniferl4bs.com"
+__copyright__   = "Copyright 2021 www.sniferl4bs.com"
 __license__ = "CC BY-NC-SA 4.0"
 __version__ = "0.1"
 __email__ = "sniferl4bs@gmail.com"
@@ -41,7 +41,7 @@ print('''
 # Mensajes 
 info_execution=(Fore.RED + '[' + Fore.GREEN  + '+' +  Fore.RED + ']' +  Fore.WHITE + Style.BRIGHT + ' Obteniendo datos de las direcciones IP' + Style.RESET_ALL)
 
-mypath='/home/snifer/Desktop/PoC/JSON/' 
+mypath='/Desktop/PoC/JSON/' 
 jsonfolder_output=mypath +'JsonFiles/' 
 ipsfile=mypath + 'lista.ip' 
 servicestring='http://ifconfig.co/json?ip=' 
